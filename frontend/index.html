@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Judge AI — Instant AI Resume Intelligence</title>
+  <meta name="description" content="Get brutally honest, AI-powered feedback on your resume in seconds." />
+
+  <!-- Google Fonts: Instrument Serif + Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans:  ['Outfit', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="rj-body overflow-x-hidden">
+
+  <!-- Ambient glow orbs -->
+  <div class="rj-orbs" aria-hidden="true">
+    <div class="rj-orb rj-orb--indigo"></div>
+    <div class="rj-orb rj-orb--violet"></div>
+    <div class="rj-orb rj-orb--cyan"></div>
+  </div>
+
+  <!-- Dot grid texture -->
+  <div class="rj-dot-grid" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header id="navbar" class="rj-navbar">
+    <div class="rj-navbar__inner">
+
+      <!-- Logo -->
+      <a href="#" class="rj-logo" aria-label="Resume Judge AI">
+        <div class="rj-logo__mark">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <span class="rj-logo__text">
+          Resume<strong>Judge</strong><em> AI</em>
+        </span>
+      </a>
+
+      <!-- Nav links -->
+      <nav class="rj-nav" role="navigation" aria-label="Main navigation">
+        <a href="#features" class="rj-nav__link">Features</a>
+        <a href="#how-it-works" class="rj-nav__link">How it Works</a>
+        <a href="#upload" class="rj-nav__link">Try Free</a>
+        <a href="#" class="rj-nav__link">Pricing</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="rj-navbar__actions">
+        <a href="#" class="rj-nav__signin">Sign in</a>
+        <a href="#upload" class="rj-btn rj-btn--primary rj-btn--sm">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          Upload Resume
+        </a>
+        <button id="mobileMenuBtn" class="rj-hamburger" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="rj-mobile-menu rj-mobile-menu--closed">
+      <a href="#features" class="rj-mobile-menu__link">Features</a>
+      <a href="#how-it-works" class="rj-mobile-menu__link">How it Works</a>
+      <a href="#upload" class="rj-mobile-menu__link">Try it Free</a>
+      <a href="#" class="rj-mobile-menu__link">Pricing</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="rj-hero">
+    <div class="rj-hero__content">
+
+      <!-- Left column -->
+      <div class="rj-hero__left">
+        <!-- Badge -->
+        <div class="rj-hero-badge" style="--delay: 0ms">
+          <span class="rj-hero-badge__dot"></span>
+          <span>GPT-4 Powered · Free to Try</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="rj-hero__h1" style="--delay: 80ms">
+          <span class="rj-hero__h1-line">Your Resume,</span>
+          <span class="rj-hero__h1-accent">Brutally Judged.</span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="rj-hero__sub" style="--delay: 160ms">
+          Drop your resume and get an instant AI-powered verdict — score breakdowns, skill gap analysis, and specific fixes to land more interviews.
+        </p>
+
+        <!-- CTAs -->
+        <div class="rj-hero__ctas" style="--delay: 240ms">
+          <a href="#upload" class="rj-btn rj-btn--hero">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            Analyze My Resume
+            <i class="fa-solid fa-arrow-right rj-btn--hero__arrow"></i>
+          </a>
+          <button class="rj-btn rj-btn--ghost">
+            <i class="fa-regular fa-circle-play rj-btn--ghost__icon"></i>
+            Watch Demo
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="rj-hero__stats" style="--delay: 320ms">
+          <div class="rj-stat">
+            <span class="rj-stat__num">50K+</span>
+            <span class="rj-stat__lbl">Resumes Analyzed</span>
+          </div>
+          <div class="rj-stat__divider"></div>
+          <div class="rj-stat">
+            <span class="rj-stat__num">4.9★</span>
+            <span class="rj-stat__lbl">Average Rating</span>
+          </div>
+          <div class="rj-stat__divider"></div>
+          <div class="rj-stat">
+            <span class="rj-stat__num">&lt;8s</span>
+            <span class="rj-stat__lbl">Analysis Time</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: hero illustration injected by JS -->
+      <div class="rj-hero__right" style="--delay: 200ms">
+        <div id="heroIllustration" class="rj-hero__illus"></div>
+      </div>
+    </div>
+
+    <div class="rj-hero__fade-bottom" aria-hidden="true"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FEATURES
+  ═══════════════════════════════════════════ -->
+  <section id="features" class="rj-section">
+    <div class="rj-section__wrap">
+      <div class="rj-section__header" data-rj-animate>
+        <p class="rj-eyebrow">Why Resume Judge AI</p>
+        <h2 class="rj-section__h2">
+          Everything recruiters <em>actually</em> look for
+        </h2>
+        <p class="rj-section__sub">Trained on thousands of successful resumes and real hiring decisions.</p>
+      </div>
+
+      <div class="rj-features">
+        <div class="rj-feat-card" data-rj-animate data-delay="0">
+          <div class="rj-feat-card__icon rj-feat-card__icon--indigo">
+            <i class="fa-solid fa-brain-circuit"></i>
+          </div>
+          <h3 class="rj-feat-card__title">Deep Content Analysis</h3>
+          <p class="rj-feat-card__body">Every bullet point, job title, and achievement is parsed and scored against real hiring benchmarks.</p>
+        </div>
+        <div class="rj-feat-card rj-feat-card--featured" data-rj-animate data-delay="80">
+          <div class="rj-feat-card__icon rj-feat-card__icon--violet">
+            <i class="fa-solid fa-chart-mixed"></i>
+          </div>
+          <h3 class="rj-feat-card__title">Score Breakdown</h3>
+          <p class="rj-feat-card__body">Get a composite score with animated breakdowns across content, formatting, impact, and ATS compatibility.</p>
+        </div>
+        <div class="rj-feat-card" data-rj-animate data-delay="160">
+          <div class="rj-feat-card__icon rj-feat-card__icon--cyan">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <h3 class="rj-feat-card__title">Actionable Rewrites</h3>
+          <p class="rj-feat-card__body">Not just what's wrong — exact language suggestions to fix it and land more callbacks.</p>
+        </div>
+        <div class="rj-feat-card" data-rj-animate data-delay="240">
+          <div class="rj-feat-card__icon rj-feat-card__icon--emerald">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <h3 class="rj-feat-card__title">Skill Gap Detection</h3>
+          <p class="rj-feat-card__body">Discover which skills you're missing for target roles and how to frame what you already have.</p>
+        </div>
+        <div class="rj-feat-card" data-rj-animate data-delay="320">
+          <div class="rj-feat-card__icon rj-feat-card__icon--indigo">
+            <i class="fa-solid fa-shield-check"></i>
+          </div>
+          <h3 class="rj-feat-card__title">ATS Optimizer</h3>
+          <p class="rj-feat-card__body">Pass automated screening systems at top companies with targeted keyword analysis.</p>
+        </div>
+        <div class="rj-feat-card" data-rj-animate data-delay="400">
+          <div class="rj-feat-card__icon rj-feat-card__icon--violet">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <h3 class="rj-feat-card__title">Private & Secure</h3>
+          <p class="rj-feat-card__body">Your resume is never stored or shared. Analyzed in-memory, delivered instantly, then gone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════════ -->
+  <section id="how-it-works" class="rj-section rj-how">
+    <div class="rj-how__glow" aria-hidden="true"></div>
+    <div class="rj-section__wrap rj-section__wrap--narrow">
+      <div class="rj-section__header" data-rj-animate>
+        <p class="rj-eyebrow">The Process</p>
+        <h2 class="rj-section__h2">From upload to <em>verdict</em> in seconds</h2>
+      </div>
+      <div class="rj-steps">
+        <div class="rj-steps__line" aria-hidden="true"></div>
+        <div class="rj-step" data-rj-animate data-delay="0">
+          <div class="rj-step__num">01</div>
+          <div class="rj-step__icon rj-step__icon--indigo">
+            <i class="fa-solid fa-upload"></i>
+          </div>
+          <h3 class="rj-step__title">Upload</h3>
+          <p class="rj-step__body">Drop your PDF or DOCX. Any format, any layout handled.</p>
+        </div>
+        <div class="rj-step" data-rj-animate data-delay="120">
+          <div class="rj-step__num">02</div>
+          <div class="rj-step__icon rj-step__icon--violet">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <h3 class="rj-step__title">Analyze</h3>
+          <p class="rj-step__body">Our AI reads every line, cross-referencing real hiring data.</p>
+        </div>
+        <div class="rj-step" data-rj-animate data-delay="240">
+          <div class="rj-step__num">03</div>
+          <div class="rj-step__icon rj-step__icon--emerald">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <h3 class="rj-step__title">Improve</h3>
+          <p class="rj-step__body">Get your verdict, score, and a clear action plan instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       UPLOAD SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="upload" class="rj-section">
+    <div class="rj-section__wrap rj-section__wrap--xs">
+      <div class="rj-section__header" data-rj-animate>
+        <p class="rj-eyebrow">Try it Free</p>
+        <h2 class="rj-section__h2">Get your <em>verdict</em></h2>
+        <p class="rj-section__sub">No signup. No credit card. Just drop your resume.</p>
+      </div>
+
+      <!-- Upload card -->
+      <div class="rj-upload-card" data-rj-animate>
+        <div class="rj-upload-card__glow" aria-hidden="true"></div>
+
+        <!-- Drop zone -->
+        <div id="dropZone" class="rj-dropzone" tabindex="0" role="button" aria-label="Upload resume">
+          <input type="file" id="fileInput" accept=".pdf,.doc,.docx" class="sr-only" />
+
+          <!-- Idle -->
+          <div id="dropIdle">
+            <div class="rj-dropzone__icon-ring">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <p class="rj-dropzone__title">Drop your resume here</p>
+            <p class="rj-dropzone__sub">PDF or DOCX · Max 10 MB</p>
+            <label for="fileInput" class="rj-btn rj-btn--primary rj-btn--sm rj-dropzone__browse">
+              <i class="fa-solid fa-folder-open"></i>
+              Browse Files
+            </label>
+          </div>
+
+          <!-- Drag hover -->
+          <div id="dropDrag" class="rj-hidden">
+            <div class="rj-dropzone__icon-ring rj-dropzone__icon-ring--active">
+              <i class="fa-solid fa-arrow-down-to-line"></i>
+            </div>
+            <p class="rj-dropzone__title rj-dropzone__title--active">Release to upload!</p>
+          </div>
+
+          <!-- File selected -->
+          <div id="dropSelected" class="rj-hidden">
+            <div class="rj-file-chip">
+              <i class="fa-solid fa-file-lines rj-file-chip__icon"></i>
+              <div>
+                <p id="selectedFileName" class="rj-file-chip__name"></p>
+                <p id="selectedFileSize" class="rj-file-chip__size"></p>
+              </div>
+              <button id="clearFile" class="rj-file-chip__clear" aria-label="Remove file">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <p class="rj-dropzone__ready">Ready to analyze</p>
+          </div>
+        </div>
+
+        <!-- Analyze button -->
+        <button id="analyzeBtn" class="rj-analyze-btn" disabled>
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          Analyze Resume Now
+          <span class="rj-analyze-btn__kbd">↵</span>
+        </button>
+
+        <!-- Trust badges -->
+        <div class="rj-trust-row">
+          <span class="rj-trust"><i class="fa-solid fa-shield-halved rj-trust__icon rj-trust__icon--emerald"></i>Private &amp; Secure</span>
+          <span class="rj-trust"><i class="fa-solid fa-bolt rj-trust__icon rj-trust__icon--yellow"></i>Instant Results</span>
+          <span class="rj-trust"><i class="fa-brands fa-openai rj-trust__icon rj-trust__icon--slate"></i>GPT-4 Powered</span>
+        </div>
+      </div>
+
+      <!-- ── Loading ── -->
+      <div id="loadingState" class="rj-hidden rj-loading-card">
+        <div class="rj-scanner">
+          <div class="rj-scanner__ring">
+            <div class="rj-scanner__inner">
+              <div class="rj-scanner__dot"></div>
+            </div>
+            <div class="rj-scanner__bar"></div>
+          </div>
+        </div>
+        <h3 id="loadingHeadline" class="rj-loading-card__title">Reading your resume…</h3>
+        <p class="rj-loading-card__sub">Our AI is checking every single line</p>
+        <div class="rj-progress-track">
+          <div id="loadingBar" class="rj-progress-bar" style="width:0%"></div>
+        </div>
+        <div class="rj-progress-labels">
+          <span id="loadingStep">Parsing document structure</span>
+          <span id="loadingPct">0%</span>
+        </div>
+      </div>
+
+      <!-- ── Results ── -->
+      <div id="resultState" class="rj-hidden rj-result-card">
+        <div class="rj-result-card__glow" aria-hidden="true"></div>
+
+        <!-- Header -->
+        <div class="rj-result-card__header">
+          <div>
+            <p class="rj-result-card__eyebrow">Analysis Complete</p>
+            <h3 class="rj-result-card__title">Your Resume Verdict</h3>
+          </div>
+          <div id="gradeCircle" class="rj-grade-circle"></div>
+        </div>
+
+        <!-- Score ring -->
+        <div class="rj-score-row">
+          <div class="rj-score-ring">
+            <svg viewBox="0 0 100 100" class="rj-score-svg">
+              <defs>
+                <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%"   stop-color="#6366f1"/>
+                  <stop offset="50%"  stop-color="#8b5cf6"/>
+                  <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+              </defs>
+              <circle class="rj-score-track" cx="50" cy="50" r="40"/>
+              <circle id="scoreArc" class="rj-score-arc" cx="50" cy="50" r="40"
+                stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                transform="rotate(-90 50 50)"/>
+            </svg>
+            <div class="rj-score-center">
+              <span id="scoreNumber" class="rj-score-num">0</span>
+              <span class="rj-score-denom">/100</span>
+            </div>
+          </div>
+          <div class="rj-score-meta">
+            <p id="scoreLabel"    class="rj-score-label">—</p>
+            <p id="scoreSubtitle" class="rj-score-subtitle"></p>
+          </div>
+        </div>
+
+        <!-- Category bars -->
+        <div class="rj-result-block">
+          <p class="rj-result-block__eyebrow">Category Breakdown</p>
+          <div id="categoryBars" class="rj-cat-bars"></div>
+        </div>
+
+        <!-- Skills -->
+        <div class="rj-result-block">
+          <p class="rj-result-block__eyebrow">Detected Skills</p>
+          <div id="skillTags" class="rj-skill-tags"></div>
+        </div>
+
+        <!-- Feedback -->
+        <div class="rj-result-block">
+          <p class="rj-result-block__eyebrow">AI Feedback</p>
+          <div id="feedbackItems" class="rj-feedback-list"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="rj-result-card__actions">
+          <button onclick="resetAnalysis()" class="rj-btn rj-btn--ghost rj-btn--block">
+            <i class="fa-solid fa-rotate-left"></i>New Analysis
+          </button>
+          <button class="rj-btn rj-btn--primary rj-btn--block">
+            <i class="fa-solid fa-download"></i>Export Report
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="rj-footer">
+    <div class="rj-footer__inner">
+      <div class="rj-logo">
+        <div class="rj-logo__mark rj-logo__mark--sm">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <span class="rj-logo__text rj-logo__text--muted">
+          Resume<strong>Judge</strong><em> AI</em>
+        </span>
+      </div>
+      <p class="rj-footer__copy">© 2025 ResumeJudge AI. Built for ambitious people.</p>
+      <div class="rj-footer__links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">API</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Injected components + main logic -->
+  <script src="components/hero-illustration.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
