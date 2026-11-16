@@ -92,7 +92,7 @@
       ">⚡</div>
       <div>
         <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;color:#e2e8f0;line-height:1.2;">Resume Judge AI</div>
-        <div style="font-size:9px;color:#475569;">Analysis Report</div>
+        <div style="font-size:9px;color:#475569;">Illustrative UI Sample</div>
       </div>
       <div style="
         margin-left:auto;padding:2px 8px;border-radius:999px;
@@ -230,7 +230,7 @@
       ">B+</div>
       <div>
         <div style="font-size:11px;font-weight:700;color:#c7d2fe;font-family:'Outfit',sans-serif;">Above Average</div>
-        <div style="font-size:9px;color:#475569;margin-top:2px;">Top 28% of resumes analyzed</div>
+        <div style="font-size:9px;color:#475569;margin-top:2px;">Static sample, not a measured percentile</div>
       </div>
     </div>
   `;
@@ -249,7 +249,7 @@
   foot.innerHTML = `
     <span style="font-size:9px;color:#1e293b;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:5px;">
       <span style="width:5px;height:5px;border-radius:50%;background:#34d399;box-shadow:0 0 5px #34d399;display:inline-block;"></span>
-      Analysis complete · 4.1 seconds
+      Illustration only · not your resume analysis
     </span>
     <div style="display:flex;gap:6px;">
       <button style="
