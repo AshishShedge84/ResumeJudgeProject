@@ -5,7 +5,7 @@
 
 'use strict';
 
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = window.RESUME_JUDGE_API_URL || (location.protocol === 'file:' ? 'http://127.0.0.1:5000' : location.origin);
 
 /* ──────────────────────────────────────
    DOM References
@@ -47,6 +47,7 @@ const feedbackItems = document.getElementById('feedbackItems');
 ────────────────────────────────────── */
 let selectedFile = null;
 let loadingTimer = null;
+let analysisRunning = false;
 
 /* ══════════════════════════════════════
    NAVBAR
@@ -136,9 +137,9 @@ function showDropState(state) {
 }
 
 function selectFile(file) {
-  const validTypes = ['application/pdf','application/msword',
+  const validTypes = ['application/pdf',
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-  if (!validTypes.includes(file.type) && !file.name.match(/\.(pdf|doc|docx)$/i)) {
+  if (!validTypes.includes(file.type) && !file.name.match(/\.(pdf|docx)$/i)) {
     showToast('Please upload a PDF or DOCX file.', 'error'); return;
   }
   if (file.size > 10 * 1024 * 1024) {
@@ -171,7 +172,9 @@ document.addEventListener('keydown', e => {
 });
 
 async function startAnalysis() {
-  if (!selectedFile) return;
+  if (!selectedFile || analysisRunning) return;
+  analysisRunning = true;
+  analyzeBtn.disabled = true;
 
   // Hide upload card, show loading
   uploadCard.style.opacity = '0.5';
@@ -194,8 +197,8 @@ async function startAnalysis() {
     clearLoadingAnimation();
 
     if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(errText || `HTTP ${response.status}`);
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.error || `Analysis failed (HTTP ${response.status}).`);
     }
 
     const data = await response.json();
@@ -210,20 +213,14 @@ async function startAnalysis() {
 
   } catch (err) {
     clearLoadingAnimation();
-    console.warn('[Resume Judge AI] API error, using demo mode:', err.message);
-
-    // Graceful demo fallback
-    await sleep(600);
     hide(loadingState);
+    hide(resultState);
+    showToast(err.message || 'Analysis unavailable. Please check the server.', 'error');
+  } finally {
     uploadCard.style.opacity = '1';
     uploadCard.style.pointerEvents = '';
-
-    const demo = buildDemoData(selectedFile.name);
-    show(resultState);
-    renderResult(demo);
-    resultState.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    showToast('Demo mode: API unreachable. Showing sample analysis.', 'info');
+    analysisRunning = false;
+    analyzeBtn.disabled = !selectedFile;
   }
 }
 
@@ -233,10 +230,10 @@ async function startAnalysis() {
 const LOADING_STEPS = [
   { pct: 8,  headline: 'Reading your resume…',       step: 'Parsing document structure' },
   { pct: 22, headline: 'Extracting content…',         step: 'Identifying sections & headings' },
-  { pct: 40, headline: 'Analysing experience…',       step: 'Scoring work history & achievements' },
+  { pct: 40, headline: 'Processing text…', step: 'Awaiting server response' },
   { pct: 58, headline: 'Mapping your skills…',        step: 'Cross-referencing skill database' },
-  { pct: 73, headline: 'Checking ATS compatibility…', step: 'Running keyword analysis' },
-  { pct: 87, headline: 'Generating feedback…',        step: 'Crafting actionable suggestions' },
+  { pct: 73, headline: 'Matching keywords…', step: 'Awaiting server response' },
+  { pct: 87, headline: 'Preparing rule-based feedback…',        step: 'Crafting actionable suggestions' },
   { pct: 96, headline: 'Almost done…',                step: 'Compiling your verdict' },
 ];
 
@@ -282,11 +279,16 @@ function renderResult(data) {
 
   // Label
   scoreLabel.textContent = grade.label;
-  scoreSubtitle.textContent = grade.subtitle;
+  scoreSubtitle.textContent = data.limitations || 'Keyword heuristic only; not a hiring or ATS score.';
 
   // Category bars
   categoryBars.innerHTML = '';
   const cats = data.categories ?? [];
+  if (!cats.length) {
+    const category = document.createElement('p');
+    category.textContent = `Predicted job category: ${data.category || 'Unavailable'}`;
+    categoryBars.appendChild(category);
+  }
   const catColors = [
     { fill: 'linear-gradient(90deg,#6366f1,#8b5cf6)', text: '#818cf8' },
     { fill: 'linear-gradient(90deg,#8b5cf6,#c026d3)', text: '#a78bfa' },
@@ -334,7 +336,7 @@ function renderResult(data) {
     warning:  { cls: 'rj-feedback-icon--warn', icon: 'fa-triangle-exclamation' },
     negative: { cls: 'rj-feedback-icon--neg',  icon: 'fa-xmark' },
   };
-  (data.feedback ?? []).forEach((item, i) => {
+  (Array.isArray(data.feedback) ? data.feedback : [{ type: 'warning', text: data.feedback || 'No feedback available.' }]).forEach((item, i) => {
     const t = fbIconMap[item.type] ?? fbIconMap.positive;
     const div = document.createElement('div');
     div.className = 'rj-feedback-item';
@@ -383,28 +385,6 @@ window.resetAnalysis = function () {
 /* ══════════════════════════════════════
    DEMO DATA (fallback when API is off)
 ══════════════════════════════════════ */
-function buildDemoData(filename) {
-  const base = 58 + Math.floor(Math.random() * 30);
-  return {
-    score: base,
-    filename,
-    categories: [
-      { name: 'Content Quality',  score: Math.min(100, base + rand(-5, 10)) },
-      { name: 'Formatting',       score: Math.min(100, base + rand(0, 15))  },
-      { name: 'Skills Relevance', score: Math.min(100, base + rand(-10, 8)) },
-      { name: 'Impact & Results', score: Math.min(100, base + rand(-15, 5)) },
-    ],
-    skills: ['Python','React','Node.js','SQL','Docker','TypeScript','AWS','REST APIs','Git','Agile'],
-    feedback: [
-      { type: 'positive', text: 'Strong technical skill set clearly highlighted — good breadth of modern technologies.' },
-      { type: 'positive', text: 'Chronological work history is well-structured and easy to scan.' },
-      { type: 'warning',  text: 'Bullet points lack quantified results. Add metrics: "Reduced load time by 40%" instead of "Improved performance".' },
-      { type: 'warning',  text: 'Professional summary is too generic. Tailor it to your target role with specific keywords.' },
-      { type: 'negative', text: 'No measurable business impact detected. Recruiters want outcomes — not just responsibilities.' },
-    ],
-  };
-}
-
 /* ══════════════════════════════════════
    TOAST NOTIFICATIONS
 ══════════════════════════════════════ */
@@ -428,7 +408,7 @@ function showToast(message, type = 'info') {
     backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.5);
     max-width:22rem;animation:rjFadeUp .4s cubic-bezier(.34,1.56,.64,1) both;
   `;
-  toast.innerHTML = `<i class="fa-solid ${s.icon}" style="font-size:.875rem;flex-shrink:0;"></i><span>${message}</span>`;
+  toast.innerHTML = `<i class="fa-solid ${s.icon}" style="font-size:.875rem;flex-shrink:0;"></i><span>${esc(message)}</span>`;
   document.body.appendChild(toast);
 
   setTimeout(() => {
@@ -448,7 +428,7 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function clamp(val, min, max) { return Math.min(max, Math.max(min, val)); }
 
-function rand(min, max) { return min + Math.floor(Math.random() * (max - min + 1)); }
+
 
 function formatBytes(bytes) {
   if (bytes < 1024) return bytes + ' B';
@@ -463,9 +443,9 @@ function esc(str) {
 }
 
 function scoreToGrade(score) {
-  if (score >= 90) return { letter: 'A+', color: '#34d399', label: 'Outstanding',        subtitle: 'Top 5% of all resumes we\'ve analyzed' };
-  if (score >= 80) return { letter: 'A',  color: '#34d399', label: 'Excellent',           subtitle: 'Well above average — strong candidate' };
-  if (score >= 70) return { letter: 'B+', color: '#22d3ee', label: 'Above Average',       subtitle: 'A few improvements could make it great' };
+  if (score >= 90) return { letter: 'A+', color: '#34d399', label: 'Outstanding',        subtitle: 'High keyword heuristic score' };
+  if (score >= 80) return { letter: 'A',  color: '#34d399', label: 'Excellent',           subtitle: 'High keyword heuristic score' };
+  if (score >= 70) return { letter: 'B+', color: '#22d3ee', label: 'Keyword Match',       subtitle: 'A few improvements could make it great' };
   if (score >= 60) return { letter: 'B',  color: '#6366f1', label: 'Solid Foundation',    subtitle: 'Some key areas need attention' };
   if (score >= 50) return { letter: 'C',  color: '#a78bfa', label: 'Needs Work',          subtitle: 'Multiple areas require improvement' };
   return                   { letter: 'D',  color: '#f87171', label: 'Significant Gaps',   subtitle: 'Consider a substantial rewrite' };

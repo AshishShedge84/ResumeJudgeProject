@@ -1,5 +1,4 @@
-echo Starting Resume Judge Server...
-
-python backend/app.py
-
+@echo off
+cd /d "%~dp0"
+python main.py
 pause

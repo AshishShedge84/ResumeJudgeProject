@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resume Judge AI — Instant AI Resume Intelligence</title>
-  <meta name="description" content="Get brutally honest, AI-powered feedback on your resume in seconds." />
+  <meta name="description" content="Classify resume text and explore keyword-based feedback." />
 
   <!-- Google Fonts: Instrument Serif + Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -103,7 +103,7 @@
         <!-- Badge -->
         <div class="rj-hero-badge" style="--delay: 0ms">
           <span class="rj-hero-badge__dot"></span>
-          <span>GPT-4 Powered · Free to Try</span>
+          <span>TF-IDF + Logistic Regression · Free to Try</span>
         </div>
 
         <!-- Headline -->
@@ -114,7 +114,7 @@
 
         <!-- Subhead -->
         <p class="rj-hero__sub" style="--delay: 160ms">
-          Drop your resume and get an instant AI-powered verdict — score breakdowns, skill gap analysis, and specific fixes to land more interviews.
+          Upload a resume to predict its job category, detect skill keywords, and receive simple rule-based feedback.
         </p>
 
         <!-- CTAs -->
@@ -176,43 +176,43 @@
           <div class="rj-feat-card__icon rj-feat-card__icon--indigo">
             <i class="fa-solid fa-brain-circuit"></i>
           </div>
-          <h3 class="rj-feat-card__title">Deep Content Analysis</h3>
-          <p class="rj-feat-card__body">Every bullet point, job title, and achievement is parsed and scored against real hiring benchmarks.</p>
+          <h3 class="rj-feat-card__title">Resume Text Classification</h3>
+          <p class="rj-feat-card__body">Extract selectable text and predict a job category using a trained text classifier.</p>
         </div>
         <div class="rj-feat-card rj-feat-card--featured" data-rj-animate data-delay="80">
           <div class="rj-feat-card__icon rj-feat-card__icon--violet">
             <i class="fa-solid fa-chart-mixed"></i>
           </div>
           <h3 class="rj-feat-card__title">Score Breakdown</h3>
-          <p class="rj-feat-card__body">Get a composite score with animated breakdowns across content, formatting, impact, and ATS compatibility.</p>
+          <p class="rj-feat-card__body">View a keyword-based heuristic score. It does not measure ATS compatibility or hiring probability.</p>
         </div>
         <div class="rj-feat-card" data-rj-animate data-delay="160">
           <div class="rj-feat-card__icon rj-feat-card__icon--cyan">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
           </div>
-          <h3 class="rj-feat-card__title">Actionable Rewrites</h3>
-          <p class="rj-feat-card__body">Not just what's wrong — exact language suggestions to fix it and land more callbacks.</p>
+          <h3 class="rj-feat-card__title">Rule-Based Feedback</h3>
+          <p class="rj-feat-card__body">Receive simple suggestions based on the keyword score. No LLM or generative rewriting is used.</p>
         </div>
         <div class="rj-feat-card" data-rj-animate data-delay="240">
           <div class="rj-feat-card__icon rj-feat-card__icon--emerald">
             <i class="fa-solid fa-tags"></i>
           </div>
-          <h3 class="rj-feat-card__title">Skill Gap Detection</h3>
-          <p class="rj-feat-card__body">Discover which skills you're missing for target roles and how to frame what you already have.</p>
+          <h3 class="rj-feat-card__title">Skill Keyword Detection</h3>
+          <p class="rj-feat-card__body">Find known skill keywords in your resume text. This is not a target-job gap analysis.</p>
         </div>
         <div class="rj-feat-card" data-rj-animate data-delay="320">
           <div class="rj-feat-card__icon rj-feat-card__icon--indigo">
             <i class="fa-solid fa-shield-check"></i>
           </div>
-          <h3 class="rj-feat-card__title">ATS Optimizer</h3>
-          <p class="rj-feat-card__body">Pass automated screening systems at top companies with targeted keyword analysis.</p>
+          <h3 class="rj-feat-card__title">Job Category Prediction</h3>
+          <p class="rj-feat-card__body">Explore a predicted category from the training dataset. This does not guarantee screening success.</p>
         </div>
         <div class="rj-feat-card" data-rj-animate data-delay="400">
           <div class="rj-feat-card__icon rj-feat-card__icon--violet">
             <i class="fa-solid fa-lock"></i>
           </div>
           <h3 class="rj-feat-card__title">Private & Secure</h3>
-          <p class="rj-feat-card__body">Your resume is never stored or shared. Analyzed in-memory, delivered instantly, then gone.</p>
+          <p class="rj-feat-card__body">Uploads are processed on the server using a temporary file that is deleted after parsing.</p>
         </div>
       </div>
     </div>
@@ -236,7 +236,7 @@
             <i class="fa-solid fa-upload"></i>
           </div>
           <h3 class="rj-step__title">Upload</h3>
-          <p class="rj-step__body">Drop your PDF or DOCX. Any format, any layout handled.</p>
+          <p class="rj-step__body">Drop a text-based PDF or DOCX. Scanned PDFs require external OCR.</p>
         </div>
         <div class="rj-step" data-rj-animate data-delay="120">
           <div class="rj-step__num">02</div>
@@ -275,7 +275,7 @@
 
         <!-- Drop zone -->
         <div id="dropZone" class="rj-dropzone" tabindex="0" role="button" aria-label="Upload resume">
-          <input type="file" id="fileInput" accept=".pdf,.doc,.docx" class="sr-only" />
+          <input type="file" id="fileInput" accept=".pdf,.docx" class="sr-only" />
 
           <!-- Idle -->
           <div id="dropIdle">
@@ -325,7 +325,7 @@
         <div class="rj-trust-row">
           <span class="rj-trust"><i class="fa-solid fa-shield-halved rj-trust__icon rj-trust__icon--emerald"></i>Private &amp; Secure</span>
           <span class="rj-trust"><i class="fa-solid fa-bolt rj-trust__icon rj-trust__icon--yellow"></i>Instant Results</span>
-          <span class="rj-trust"><i class="fa-brands fa-openai rj-trust__icon rj-trust__icon--slate"></i>GPT-4 Powered</span>
+          <span class="rj-trust"><i class="fa-brands fa-openai rj-trust__icon rj-trust__icon--slate"></i>TF-IDF + Logistic Regression</span>
         </div>
       </div>
 
@@ -340,7 +340,7 @@
           </div>
         </div>
         <h3 id="loadingHeadline" class="rj-loading-card__title">Reading your resume…</h3>
-        <p class="rj-loading-card__sub">Our AI is checking every single line</p>
+        <p class="rj-loading-card__sub">Processing your document; progress is illustrative</p>
         <div class="rj-progress-track">
           <div id="loadingBar" class="rj-progress-bar" style="width:0%"></div>
         </div>
@@ -392,7 +392,7 @@
 
         <!-- Category bars -->
         <div class="rj-result-block">
-          <p class="rj-result-block__eyebrow">Category Breakdown</p>
+          <p class="rj-result-block__eyebrow">Predicted Job Category</p>
           <div id="categoryBars" class="rj-cat-bars"></div>
         </div>
 
@@ -404,7 +404,7 @@
 
         <!-- Feedback -->
         <div class="rj-result-block">
-          <p class="rj-result-block__eyebrow">AI Feedback</p>
+          <p class="rj-result-block__eyebrow">Rule-Based Feedback</p>
           <div id="feedbackItems" class="rj-feedback-list"></div>
         </div>
 
@@ -413,9 +413,7 @@
           <button onclick="resetAnalysis()" class="rj-btn rj-btn--ghost rj-btn--block">
             <i class="fa-solid fa-rotate-left"></i>New Analysis
           </button>
-          <button class="rj-btn rj-btn--primary rj-btn--block">
-            <i class="fa-solid fa-download"></i>Export Report
-          </button>
+
         </div>
       </div>
     </div>
@@ -444,7 +442,7 @@
   </footer>
 
   <!-- Injected components + main logic -->
-  <script src="components/hero-illustration.js"></script>
+  <script src="hero-illustration.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

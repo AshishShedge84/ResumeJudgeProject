@@ -1,3 +1,5 @@
+import re
+
 skills_list = [
     "python",
     "java",
@@ -18,7 +20,7 @@ def get_skills(text):
     text = text.lower()
 
     for s in skills_list:
-        if s in text:
+        if re.search(r"(?<!\w)" + re.escape(s) + r"(?!\w)", text):
             found.append(s)
 
     return found

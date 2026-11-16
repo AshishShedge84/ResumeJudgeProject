@@ -1,0 +1,208 @@
+{
+  "dataset": "UpdatedResumeDataSet.csv",
+  "source_rows": 962,
+  "unique_valid_rows": 166,
+  "removed_rows": 796,
+  "train_rows": 132,
+  "test_rows": 34,
+  "classes": [
+    "Advocate",
+    "Arts",
+    "Automation Testing",
+    "Blockchain",
+    "Business Analyst",
+    "Civil Engineer",
+    "Data Science",
+    "Database",
+    "DevOps Engineer",
+    "DotNet Developer",
+    "ETL Developer",
+    "Electrical Engineering",
+    "HR",
+    "Hadoop",
+    "Health and fitness",
+    "Java Developer",
+    "Mechanical Engineer",
+    "Network Security Engineer",
+    "Operations Manager",
+    "PMO",
+    "Python Developer",
+    "SAP Developer",
+    "Sales",
+    "Testing",
+    "Web Designing"
+  ],
+  "random_state": 42,
+  "test_size": 0.2,
+  "scikit_learn_version": "1.8.0",
+  "accuracy": 0.5,
+  "macro_f1": 0.30492929292929294,
+  "baseline_accuracy": 0.08823529411764706,
+  "baseline_macro_f1": 0.006486486486486487,
+  "per_class": {
+    "Advocate": {
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1-score": 0.8,
+      "support": 2.0
+    },
+    "Arts": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Automation Testing": {
+      "precision": 0.3333333333333333,
+      "recall": 1.0,
+      "f1-score": 0.5,
+      "support": 1.0
+    },
+    "Blockchain": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Business Analyst": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Civil Engineer": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1.0
+    },
+    "Data Science": {
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1-score": 0.6666666666666666,
+      "support": 2.0
+    },
+    "Database": {
+      "precision": 0.2857142857142857,
+      "recall": 1.0,
+      "f1-score": 0.4444444444444444,
+      "support": 2.0
+    },
+    "DevOps Engineer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "DotNet Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2.0
+    },
+    "ETL Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Electrical Engineering": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1.0
+    },
+    "HR": {
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1-score": 0.6666666666666666,
+      "support": 2.0
+    },
+    "Hadoop": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 2.0
+    },
+    "Health and fitness": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Java Developer": {
+      "precision": 0.375,
+      "recall": 1.0,
+      "f1-score": 0.5454545454545454,
+      "support": 3.0
+    },
+    "Mechanical Engineer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Network Security Engineer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Operations Manager": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "PMO": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Python Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "SAP Developer": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "Sales": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1.0
+    },
+    "Testing": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2.0
+    },
+    "Web Designing": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1.0
+    },
+    "accuracy": 0.5,
+    "macro avg": {
+      "precision": 0.2664285714285714,
+      "recall": 0.4,
+      "f1-score": 0.30492929292929294,
+      "support": 34.0
+    },
+    "weighted avg": {
+      "precision": 0.304796918767507,
+      "recall": 0.5,
+      "f1-score": 0.3615270350564468,
+      "support": 34.0
+    }
+  },
+  "limitations": "Single stratified holdout on a small public dataset; not evidence of production hiring quality. Near-duplicate and external validation remain future work."
+}
